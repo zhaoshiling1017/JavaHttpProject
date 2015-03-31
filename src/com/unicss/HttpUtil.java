@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -137,5 +138,13 @@ public class HttpUtil {
 			 e.printStackTrace();
 		 }
 		 return null;
+	}
+	public static void main(String[] args) {
+		Map<String, String> paramMap = new HashMap<String, String>();
+		paramMap.put("mobiles", "18612700346,18801321546");
+		paramMap.put("contents", "你本次的验证码是：赵喜艳会员卡号：2001040351会员积分：0【米氏孕婴】,你本次的验证码是：赵喜艳会员卡号：2001040444会员积分：0【米氏孕婴】");
+		paramMap.put("userId", "");
+		paramMap.put("pwd", "");
+		System.out.println(httpPost(paramMap, ""));
 	}
 }
