@@ -141,10 +141,13 @@ public class HttpUtil {
 	}
 	public static void main(String[] args) {
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("mobiles", "18612700346,18801321546");
-		paramMap.put("contents", "你本次的验证码是：赵喜艳会员卡号：2001040351会员积分：0【米氏孕婴】,你本次的验证码是：赵喜艳会员卡号：2001040444会员积分：0【米氏孕婴】");
-		paramMap.put("userId", "");
-		paramMap.put("pwd", "");
-		System.out.println(httpPost(paramMap, ""));
+		paramMap.put("sendno", "4294967");
+		paramMap.put("app_key", "f9393973ecc12ab885be62d1");
+		paramMap.put("receiver_type", "5");
+		paramMap.put("receiver_value", "020e613328d");
+		paramMap.put("msg_type", "2");
+		paramMap.put("msg_content", "{\"message\":\"自定义消息\"}");
+		paramMap.put("verification_code", "7f7cad1fdc1f1a4b16c0b13cc7184e29".toUpperCase());
+		System.out.println(httpPost(paramMap, "http://api.jpush.cn:8800/v2/push"));
 	}
 }
