@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.http.HttpEntity;
@@ -140,14 +141,31 @@ public class HttpUtil {
 		 return null;
 	}
 	public static void main(String[] args) {
+		//getAccessToken();
 		Map<String, String> paramMap = new HashMap<String, String>();
-		paramMap.put("sendno", "4294967");
-		paramMap.put("app_key", "f9393973ecc12ab885be62d1");
-		paramMap.put("receiver_type", "5");
-		paramMap.put("receiver_value", "020e613328d");
-		paramMap.put("msg_type", "2");
-		paramMap.put("msg_content", "{\"message\":\"自定义消息\"}");
-		paramMap.put("verification_code", "7f7cad1fdc1f1a4b16c0b13cc7184e29".toUpperCase());
-		System.out.println(httpPost(paramMap, "http://api.jpush.cn:8800/v2/push"));
+		JSONArray items = new JSONArray();
+		JSONObject obj = new JSONObject();
+		obj.put("OrderNumber", 223557556);
+		JSONArray arr = new JSONArray();
+		arr.add("http://www.fapiao.com/dzfp-web/pdf/download?request=jqLHrCZHRKuHfORtg7UgVOHWMxc-9qMfBfDSTXoMGatVl98J1ZFbdHwOwKjVLdsYTJSoYR5xC69gxsQby.55gA__%5EDfaGdAIedj");
+		obj.put("InvoiceUrls", arr);
+		items.add(obj);
+		paramMap.put("VendorNo", "18");
+		paramMap.put("AuthKey", "3f8caf62c76b28bd8e588ba666cbb9a7");
+		paramMap.put("Items", items.toString());
+		JSONObject json = JSONObject.fromObject(paramMap);
+		System.out.println(json);
+		String url = "https://ssl.mall.cmbchina.com/api/sellerapi/uploadeinvoice.json?access_token=h9GQ4goQfuM5%2fp6iuh9SWRjgK9hnrWnp";
+		System.out.println(HttpsUtil.httpsPostForJSON(url, paramMap));
+	}
+	
+	public static void getAccessToken() {
+		Map<String,String> paramsMap = new HashMap<String, String>();
+		String url = "https://ssl.mall.cmbchina.com/oauth2/token";
+		paramsMap.put("VendorNo", "18");
+		paramsMap.put("clientId", "TT8C6DC85F");
+		paramsMap.put("client_secrect", "46e6dd1185d522c5faab8f3265ff41e2");
+		paramsMap.put("grant_type", "client_credentials");
+		System.out.println(httpGet(paramsMap, url));
 	}
 }
